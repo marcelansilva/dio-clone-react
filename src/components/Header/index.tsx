@@ -2,7 +2,6 @@ import React from "react";
 import { Button } from "../Button";
 import {
   BuscarInputContainer,
-  Column,
   Row,
   Input,
   Container,
@@ -13,8 +12,9 @@ import {
 } from "./styles";
 
 import logo from "../../assets/logo.png";
+import { IHeader } from "./types";
 
-const Header = ({ autenticado }) => {
+const Header = ({ autenticado }: IHeader) => {
   return (
     <Wrapper>
       <Container>
