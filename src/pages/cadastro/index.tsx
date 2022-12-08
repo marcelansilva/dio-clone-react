@@ -1,10 +1,9 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { MdEmail, MdLock } from "react-icons/md";
+import { MdPerson, MdEmail, MdLock } from "react-icons/md";
 import { Input } from "../../components/Input";
 import { Button } from "../../components/Button";
 import { Header } from "../../components/Header";
-import { api } from "../../services/api";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import {
@@ -12,17 +11,19 @@ import {
   Title,
   Column,
   CriarText,
-  EsqueciText,
   Row,
   SubtitleLogin,
   TitleLogin,
   Wrapper,
-} from "../login/styles";
+  FinalText,
+  TenhoText,
+} from "../cadastro/styles";
 import { IFormData } from "./types";
 
 const schema = yup
   .object({
-    email: yup.string().email("E-mail inválido").required("Campo obrigatório!"),
+    name: yup.string().required("Campo obrigatório!"),
+    email: yup.string().email().required("Campo obrigatório!"),
     password: yup
       .string()
       .min(3, "No mínimo 3 caracteres!")
@@ -30,8 +31,12 @@ const schema = yup
   })
   .required();
 
-const Login = () => {
+const Cadastro = () => {
   const navigate = useNavigate();
+
+  const handleClickSignIn = () => {
+    navigate("/login");
+  };
 
   const {
     control,
@@ -42,23 +47,8 @@ const Login = () => {
     mode: "onChange",
   });
 
-  const onSubmit = async (formData: IFormData) => {
-    try {
-      const { data } = await api.get(
-        `/users?email=${formData.email}&senha=${formData.password}`
-      );
-      if (data.length && data[0].id) {
-        navigate("/feed");
-        return;
-      }
-      alert("Usuário ou senha inválido");
-    } catch (error) {
-      alert("Houve um erro, tente novamente.");
-    }
-  };
-
-  const handleClickNewAcc = () => {
-    navigate("/cadastro");
+  const onSubmit = () => {
+    alert("Cadastro efetuado ocm sucesso!");
   };
 
   return (
@@ -68,34 +58,47 @@ const Login = () => {
         <Column>
           <Title>
             A plataforma para você aprender com experts, dominar as principais
-            tecnologias e entrar mais rápido nas empresas mais desejadas!
+            tecnologias e entrar mais rápido nas empresas mais desejadas.
           </Title>
         </Column>
         <Column>
           <Wrapper>
-            <TitleLogin>Faça seu cadastro</TitleLogin>
+            <TitleLogin>Crie sua conta e make the change._</TitleLogin>
             <SubtitleLogin>Faça seu login e make the change._</SubtitleLogin>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form onSubmit={onSubmit}>
+              <Input
+                placeholder="Nome completo"
+                leftIcon={<MdPerson color="#8647AD" />}
+                name="nome"
+                control={control}
+              />
+
               <Input
                 placeholder="E-mail"
-                leftIcon={<MdEmail />}
+                leftIcon={<MdEmail color="#8647AD" />}
                 name="email"
-                errorMessage={errors?.email?.message}
                 control={control}
               />
               <Input
                 type="password"
                 placeholder="Senha"
-                leftIcon={<MdLock />}
+                leftIcon={<MdLock color="#8647AD" />}
                 name="password"
-                errorMessage={errors?.password?.message}
                 control={control}
               />
-              <Button title="Entrar" variant="secondary" type="submit" />
+              <Button
+                title="Criar minha conta"
+                variant="secondary"
+                type="submit"
+              />
             </form>
+            <FinalText>
+              Ao clicar em "criar minha conta grátis", declaro que aceito as
+              Políticas de Privacidade e os Termos de Uso da DIO.
+            </FinalText>
             <Row>
-              <EsqueciText>Esqueci minha senha</EsqueciText>
-              <CriarText onClick={handleClickNewAcc}>Criar Conta</CriarText>
+              <TenhoText>Já tenho conta</TenhoText>
+              <CriarText onClick={handleClickSignIn}>Fazer login</CriarText>
             </Row>
           </Wrapper>
         </Column>
@@ -104,4 +107,4 @@ const Login = () => {
   );
 };
 
-export { Login };
+export { Cadastro };

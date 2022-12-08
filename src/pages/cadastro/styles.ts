@@ -5,6 +5,7 @@ export const Container = styled.main`
   max-width: 80%;
   margin: 0 auto;
   margin-top: 120px;
+  margin-right: 40px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -56,13 +57,29 @@ export const SubtitleLogin = styled.p`
   margin-bottom: 35px;
 `;
 
-export const EsqueciText = styled.p`
+export const FinalText = styled.p`
+  width: 372px;
+  height: 75px;
+  left: 750px;
+  top: 498px;
+  margin-top: 20px;
+
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 25px;
+
+  color: #ffffff;
+`;
+
+export const TenhoText = styled.p`
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 700;
   font-size: 14px;
   line-height: 19px;
-  color: #e5e044;
+  color: #ffffff;
 `;
 
 export const CriarText = styled.p`

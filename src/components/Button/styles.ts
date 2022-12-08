@@ -10,6 +10,10 @@ export const ButtonContainer = styled.button<IButtonStyled>`
   min-width: 120px;
   width: 100%;
 
+  &:hover {
+    cursor: pointer;
+  }
+
   ${({ variant }) =>
     variant !== "primary" &&
     css`
