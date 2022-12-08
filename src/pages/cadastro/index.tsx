@@ -48,7 +48,7 @@ const Cadastro = () => {
   });
 
   const onSubmit = () => {
-    alert("Cadastro efetuado ocm sucesso!");
+    alert("Cadastro efetuado com sucesso!");
   };
 
   return (
